@@ -1,0 +1,23 @@
+{
+  "name": "fox",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com/cypress-e4e/fox.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/cypress-e4e/fox/issues"
+  },
+  "homepage": "https://gitlab.com/cypress-e4e/fox#readme",
+  "devDependencies": {
+    "cypress": "^14.2.0"
+  }
+}
