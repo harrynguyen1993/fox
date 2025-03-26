@@ -1,13 +1,14 @@
 {
-  "baseUrl": "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login",
+  "baseUrl": "https://opensource-demo.orangehrmlive.com/web/index.php",
   "defaultCommandTimeout": 10000,
   "viewportWidth": 1280,
   "viewportHeight": 720,
   "video": true,
-  "reporter": "mochawesome",
+  "reporter": "cypress-mochawesome-reporter",
+  "screenshotOnRunFailure": true,
   "reporterOptions": {
     "reportDir": "reports",
-    "overwrite": false,
+    "overwrite": true,
     "html": true,
     "json": true
   },

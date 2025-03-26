@@ -12,7 +12,6 @@ module.exports = defineConfig({
       });
 
       console.log("🚀 Cypress Integration tests are starting...");
-
       on("before:browser:launch", (browser, launchOptions) => {
         if (browser.name === "chrome") {
           launchOptions.args.push("--disable-gpu");
@@ -28,6 +27,16 @@ module.exports = defineConfig({
         config = { ...config, ...customConfig }; // ✅ Merge settings correctly
       }
 
+      // Automatically delete video if test passes
+      on("after:spec", (spec, results) => {
+        if (results && results.video && results.stats.failures === 0) {
+          fs.unlinkSync(results.video); // Delete video if no test failures
+        }
+      });
+
+       // Enable Mochawesome merge support
+       require("cypress-mochawesome-reporter/plugin")(on);
+       
       // ✅ Show config only if DEBUG=true
       console.log("✅ Cypress Config:", JSON.stringify(config, null, 2));
   
