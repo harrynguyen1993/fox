@@ -18,6 +18,10 @@
   },
   "homepage": "https://gitlab.com/cypress-e4e/fox#readme",
   "devDependencies": {
+    "@shelex/cypress-allure-plugin": "^2.40.2",
     "cypress": "^14.2.0"
+  },
+  "dependencies": {
+    "mochawesome": "^7.1.3"
   }
 }

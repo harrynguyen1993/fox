@@ -1,0 +1,18 @@
+{
+  "baseUrl": "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login",
+  "defaultCommandTimeout": 10000,
+  "viewportWidth": 1280,
+  "viewportHeight": 720,
+  "video": true,
+  "reporter": "mochawesome",
+  "reporterOptions": {
+    "reportDir": "reports",
+    "overwrite": false,
+    "html": true,
+    "json": true
+  },
+  "env": {
+    "ENV": "prod",
+    "API_URL": "https://test-api.k6.io"
+  }
+}
