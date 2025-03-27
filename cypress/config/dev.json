@@ -13,7 +13,8 @@
     "json": true
   },
     "env": {
-      "ENV": "dev",
-      "API_URL": "https://test-api.k6.io"
+      "environment": "dev",
+      "API_URL": "https://test-api.k6.io",
+      "grepFilterSpecs": true
     }
   }
