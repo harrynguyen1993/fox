@@ -1,16 +1,32 @@
-import dotenv from "dotenv";
-import { defineConfig } from "cypress";
-import axios from "axios";
-import fs from "fs";
-import path from "path";
+const dotenv = require("dotenv");
+const { defineConfig } = require("cypress");
+const axios = require("axios");
+const fs = require("fs");
+const path = require("path");
+
+const createBundler = require("@bahmutov/cypress-esbuild-preprocessor");
+const addCucumberPreprocessorPlugin =
+  require("@badeball/cypress-cucumber-preprocessor").addCucumberPreprocessorPlugin;
+const createEsbuildPlugin =
+  require("@badeball/cypress-cucumber-preprocessor/esbuild").createEsbuildPlugin;
 
 dotenv.config();
-export const TEAMS_WEBHOOK_URL = process.env.TEAMS_WEBHOOK_URL;
+const TEAMS_WEBHOOK_URL = process.env.TEAMS_WEBHOOK_URL;
 
-export default defineConfig({
+module.exports = defineConfig({
   e2e: {
-    specPattern: "cypress/e2e/test/*.cy.js",
-    setupNodeEvents(on, config) {
+    specPattern: "cypress/test-cases/cucumber/feature/**/*.feature",
+
+    async setupNodeEvents(on, config) {
+      await addCucumberPreprocessorPlugin(on, config);
+
+      on(
+        "file:preprocessor",
+        createBundler({
+          plugins: [createEsbuildPlugin(config)],
+        })
+      );
+
       on("after:run", async () => {
         console.log("🔥 after:run successfully!");
 
@@ -20,14 +36,16 @@ export default defineConfig({
         );
 
         if (!fs.existsSync(reportPath)) {
-          console.error("Can't find report:", reportPath);
+          console.error("❌ Can't find report:", reportPath);
           return;
         }
 
         try {
           const data = fs.readFileSync(reportPath, "utf8");
           const report = JSON.parse(data);
-          const testFiles = [...new Set(report.results.map((test) => test.file))];
+          const testFiles = [
+            ...new Set(report.results.map((test) => test.file)),
+          ];
           const startTime = new Date(report.stats.start);
           const formattedTime = startTime.toLocaleString("vi-VN", {
             timeZone: "Asia/Ho_Chi_Minh",
@@ -35,7 +53,7 @@ export default defineConfig({
 
           const message = {
             text: `📢 Cypress Test Report 📢\n
-            📂 Test Files:\n📂 ${testFiles}\n
+            📂 Test Files:\n📂 ${testFiles.join("\n")}\n
             ⏰ Execution time: ${formattedTime}\n
             ✅ Passed: ${report.stats.passes}\n
             ❌ Failed: ${report.stats.failures}\n
@@ -65,4 +83,4 @@ export default defineConfig({
       json: true,
     },
   },
-});
+})
