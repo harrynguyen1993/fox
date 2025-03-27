@@ -1,5 +1,5 @@
 {
-  "baseUrl": "https://opensource-demo.orangehrmlive.com/web/index.php",
+  "baseUrl": "https://opadasdasdasdasensource-demo.orangehrmlive.com/web/index.php",
   "defaultCommandTimeout": 10000,
   "viewportWidth": 1280,
   "viewportHeight": 720,
@@ -13,7 +13,8 @@
     "json": true
   },
   "env": {
-    "ENV": "stg",
+    "grepFilterSpecs": true,
+    "environment": "stg",
     "API_URL": "https://test-api.k6.io"
     }
 }
