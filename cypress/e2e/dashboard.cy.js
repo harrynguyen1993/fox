@@ -11,11 +11,11 @@ describe("Dashboard Page Tests", () => {
         DashboardPage.validateDashboardPage();
     });
 
-    it("should display the correct Dashboard title", () => {
+    it("should display the correct Dashboard title", { tags: ["sanity"] },() => {
         DashboardPage.elements.headerTitle().should("contain.text", "Dashboard");
     });
 
-    it("should navigate to different menu items and validate URLs", () => {
+    it("should navigate to different menu items and validate URLs",  { tags: ["regression"] } ,() => {
         const menuTests = [
             { menu: "Admin", urlFragment: "/admin/viewSystemUsers" },
             { menu: "PIM", urlFragment: "/pim/viewEmployeeList" },
@@ -41,7 +41,7 @@ describe("Dashboard Menu Verification", () => {
         DashboardPage.validateDashboardPage();
     });
 
-    it("should display all expected menu items on the left sidebar", () => {
+    it("should display all expected menu items on the left sidebar", { tags: ["sanity", "regression"] },() => {
         const expectedMenuItems = [
             "Admin",
             "PIM",

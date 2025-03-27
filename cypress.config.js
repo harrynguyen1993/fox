@@ -35,12 +35,10 @@ module.exports = defineConfig({
       });
 
        // Enable Mochawesome merge support
-       require("cypress-mochawesome-reporter/plugin")(on);
-       
+      require("cypress-mochawesome-reporter/plugin")(on);
+      require("cypress-grep/src/plugin")(on, config); 
       // ✅ Show config only if DEBUG=true
       console.log("✅ Cypress Config:", JSON.stringify(config, null, 2));
-  
-
       return config;
     },
     retries: {
@@ -54,6 +52,8 @@ module.exports = defineConfig({
   },
 
   env: {
+    grepFilterSpecs: true,
+    grep: "smoke|regression|sanity",
     FOO: "bar",
     allure: true,
     DEBUG: false, // ✅ Set to true when debugging

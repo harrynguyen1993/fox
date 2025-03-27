@@ -1,5 +1,4 @@
 import BasePage from "./basePage";
-
 class DashboardPage extends BasePage {
     elements = {
         headerTitle: () => cy.get('.oxd-topbar-header-title'),  // Dashboard header
