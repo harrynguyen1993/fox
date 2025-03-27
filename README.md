@@ -42,3 +42,7 @@ npx cypress run && npx mochawesome-merge cypress/reports/*.json > mochawesome-re
 npx cypress run
 allure generate allure-results --clean
 allure open
+## How to Run Tests by Tag
+npx cypress run --env grep=sanity
+npx cypress run --env grep=regression
+npx cypress run --env grep="sanity regression"

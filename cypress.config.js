@@ -19,7 +19,7 @@ module.exports = defineConfig({
         return launchOptions;
       });
 
-      const env = config.env.environment || "dev"; // Default to dev
+      const env = config.env.env || "dev"; // Default to dev
       const configFile = `./cypress/config/${env}.json`;
 
       if (fs.existsSync(configFile)) {
@@ -35,12 +35,10 @@ module.exports = defineConfig({
       });
 
        // Enable Mochawesome merge support
-       require("cypress-mochawesome-reporter/plugin")(on);
-       
+      require("cypress-mochawesome-reporter/plugin")(on);
+      require("cypress-grep/src/plugin")(config);
       // ✅ Show config only if DEBUG=true
-      console.log("✅ Cypress Config:", JSON.stringify(config, null, 2));
-  
-
+      // console.log("✅ Cypress Config:", JSON.stringify(config, null, 2));
       return config;
     },
     retries: {
@@ -54,7 +52,9 @@ module.exports = defineConfig({
   },
 
   env: {
+    grepFilterSpecs: true,
     FOO: "bar",
+    grep: "",
     allure: true,
     DEBUG: false, // ✅ Set to true when debugging
   },
